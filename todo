@@ -1,0 +1,36 @@
+Title: todo file for my proxy
+Author: matthias (matthias@corelatus.com)
+----------------------------------------------------------------------
+
+   - Add support for DHCP clients other than pump
+ 
+   - Improve makefile so that a SAE build is possible. Would make it
+     possible for people who know nothing about erlang to use this.
+
+   - Syntax errors in the config file cause a crash. Could be friendlier.
+
+   - Dynamic DNS is only re-run if we re-login. Maybe some
+     services change IP addresses _without_ logging out. Telia doesn't,
+     as far as I know.
+
+   - Add support for dynamic dns from suppliers other than zoneedit
+
+   - Can't change the configuration without restarting. Idea:
+     if I had a registered server which kept track of all my
+     spawned processes, I could re-read the config file (say in
+     response to someone telnetting to a certain port, or via
+     to_erl) and then divide the servers into 
+
+       {unchanged, changed, removed}
+
+     I can leave the first alone, restart the second and kill
+     the third.
+
+   - The 'reflect' module has grown too complex. It should be broken up.
+
+   - HTTP/1.1 proxy support might make a things go slightly faster
+
+   - The bandwidth-throttling is a little simple-minded. It works
+     well enough to stop one download from slowing down everything
+     else, but it isn't smart enough to do that for multiple concurrent
+     downloads. Wouldn't be hard to implement.

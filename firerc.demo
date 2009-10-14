@@ -1,0 +1,89 @@
+# Firewall config file. Lines starting with a # are ignored.
+#                       N.B. you can't start a comment partway through a line
+# 
+# Valid lines:
+#
+# autologin <username> <password>
+# bandwidth <integer>
+# dns <hostname>
+# dyndns <hostname> <auth-string>
+# external_if <ethernet-device-name>
+# internal_if <ethernet_device-name>
+# ftp_proxy <port>
+# http_proxy <port>
+# ftp_forward <source-port> <host> <dest-port>
+# http_forward <source-port> <host> <dest-port>
+# log_dir <absolute-directory>
+# <port on firewall> <host to connect to> <port to connect to> [options]
+#
+# The last form is the most common; it's used for port forwarding, e.g.:
+#
+# 1234 www.slashdot.org 80
+#
+# means that if you connect to port 123 on the firewall, it'll teleport you
+# to port 80 on slashdot.
+#
+
+#----------------------------------------------------------------------
+# First of all, some general configuration to keep things running.
+# These must come first in the file.
+
+# Auto login to Telia's machine. No idea why this is necessary (it's my
+# phone line!), but I digress. 
+autologin username password
+
+# The nominal bandwidth of our connection in kBytes/s
+bandwidth 56
+
+# My ISPs DNS server. For now we can only specify one.
+dns 195.67.199.18
+
+# dynamic DNS. The password is just the result of 
+#   httpd_util:encode_base64("username:password")
+#dyndns hemma.lisalinda.com password
+
+# Which device is the external ethernet? Which is the internal?
+# We need to know this so we run DHCP on the right IF and so we
+# can reject people from outside trying to use our mail relay.
+internal_if eth0
+external_if eth1
+
+# Where to write log files
+log_dir /var/log/proxy/
+
+#----------------------------------------------------------------------
+# And now a bunch of port forwards. It's easiest if this is kept sorted
+# by port number
+
+# outgoing email
+25 mail1.telia.com 25
+
+# Thomas' Ferret HTTP server
+http_forward 80 172.16.10.10 80
+
+# FTP proxy
+ftp_proxy 3356
+ftp_alias me username ftp.someftpserver.com password
+
+# DNS via TCP. Access with something like
+# dig +tcp -p 5677 @proxy [query]
+5677 10.0.0.1 53
+
+# email for Matthias
+5679 www.fastmail.fm   143
+5683 imap.levonline.com 143
+
+# busybox CVS
+5684 busybox.net 2401
+
+# news (for Thomas)
+5699 gamenews.vr1.com 119
+
+# tunnel to the webhotel
+5700 ssh.levonline.com 22
+
+# http proxy 
+http_proxy 8080
+
+# incoming SSH connections
+22 my_ssh_server 22 bi

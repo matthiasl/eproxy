@@ -1,0 +1,59 @@
+Title: README file for my TCP proxy/firewall
+Author: Matthias (matthias@corelatus.se)
+----------------------------------------------------------------------
+
+What is this?
+
+    A firewall babysitter and FTP/TCP proxy written in Erlang.
+
+    Features:
+
+     - ZoneEdit Dynamic DNS client.
+
+     - Generic TCP port forwarder. Lets SSH, IMAP, POP, 
+       SMTP, NNTP, CVS, etc. through the firewall. 
+
+     - Incoming TCP port forwarder. Forwards external
+       connections to a certain machine on the inside.
+
+     - Bandwidth rationing. Problem: someone else is downloading an 
+       ISO, so now all the interactive SSH connections are sluggish
+       for the next couple of hours. Solution: throttle the download
+       in the proxy.
+
+What do I need to run it?
+
+     * A machine with two ethernet interfaces acting as a firewall
+     * The 'pump' DHCP client
+     * Erlang R9B-1 or later
+
+     You can also use R9B-0 or R8B-x, but if you want FTP to work in
+     your browser, you need to supply a patched 'ftp' module. Luke
+     Gorrie posted the patch to the mailing list on 13. January 2003.
+
+How do I start it?
+
+     1. Unpack the files somewhere.
+     2. run 'make'
+     3. mv firerc.demo firerc
+     4. Take a look at "firerc". Edit it.
+     5. Start erlang and the proxy, perhaps something like:
+
+         erl -detached -s reflect go
+
+How do I get UDP packets through my firewall?
+
+     This proxy doesn't have any UDP support. You can, of course, get
+     the UDP packets through some other way, such as configuring your
+     system to be a router.
+
+What's the licence?
+
+     I've put all the source under a BSD licence. I did that because
+     I figured a BSD licence would let most people do what they want.
+     If you want some other licence, mail me, preferably with some
+     reasoning.
+
+See also: the 'todo' file
+
+// eof
