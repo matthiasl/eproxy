@@ -6,7 +6,7 @@ version=1.3
 all: $(objs)
 
 ship: $(objs) firerc proxy 
-	tar -czvf firewall.tgz $^ firerc.home
+	tar -czvf firewall.tgz $^ firerc
 
 dist: firerc.demo proxy 
 	mkdir eproxy-$(version)
