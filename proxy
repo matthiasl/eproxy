@@ -1,0 +1,14 @@
+#!
+#
+# This shell scirpt should start the proxy on the target system.
+#
+# My local version does the following:
+#
+#  - sets up IPtables
+#  - runs pump (a DHCP client)
+#  - sets up nsswitch.conf
+#  - sets up /etc/host.conf
+#  
+# and then starts the Erlang code, like this:
+/opt/erlang/bin/erl -s reflect go -detached
+
