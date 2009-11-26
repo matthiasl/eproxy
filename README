@@ -2,6 +2,12 @@ Title: README file for my TCP proxy/firewall
 Author: Matthias (matthias@corelatus.se)
 ----------------------------------------------------------------------
 
+Warning! Abandonware: 
+    Corelatus used this code as a firewall for about five years.
+    Eventually, we decided that an IPtables based firewall was
+    sufficient for our needs. I've put the code on github because
+    someone asked me to. I'm no longer actively maintaining it.
+
 What is this?
 
     A firewall babysitter and FTP/TCP proxy written in Erlang.
